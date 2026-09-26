@@ -1,0 +1,47 @@
+{
+  "trees_per_km2_vs_mhlth": {
+    "x": "trees_per_km2",
+    "y": "mhlth",
+    "rho": -0.0667,
+    "p": 0.3519,
+    "n": 197
+  },
+  "hvi_rank_vs_mhlth": {
+    "x": "hvi_rank",
+    "y": "mhlth",
+    "rho": 0.7252,
+    "p": 1.969e-33,
+    "n": 197
+  },
+  "hvi_rank_vs_mhlth_partial_income": {
+    "x": "hvi_rank",
+    "y": "mhlth",
+    "control": "median_income",
+    "rho": 0.4109,
+    "p": 2.204e-09,
+    "n": 197,
+    "df": 194
+  },
+  "trees_per_km2_vs_mhlth_partial_income": {
+    "x": "trees_per_km2",
+    "y": "mhlth",
+    "control": "median_income",
+    "rho": -0.0058,
+    "p": 0.9358,
+    "n": 197,
+    "df": 194
+  },
+  "hvi_rank_vs_mhlth_partial_income_pct_black": {
+    "x": "hvi_rank",
+    "y": "mhlth",
+    "controls": [
+      "median_income",
+      "pct_black_pop"
+    ],
+    "rho": 0.1258,
+    "p": 0.07969,
+    "n": 197,
+    "df": 193
+  },
+  "residential_nta_count": 197
+}

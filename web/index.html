@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>NYC Heat &amp; Mind — Map</title>
+  </head>
+  <body class="map-page">
+    <header class="site-header">
+      <span class="brand">NYC Heat &amp; Mind</span>
+      <nav>
+        <a href="/" aria-current="page">Map</a>
+        <a href="/overlap/">Overlap</a>
+        <a href="/methods/">Methods</a>
+      </nav>
+    </header>
+    <main class="map-layout">
+      <div id="map" class="map" role="region" aria-label="Map of NYC neighborhoods"></div>
+      <div class="controls">
+        <fieldset id="layers">
+          <legend>Map layer</legend>
+        </fieldset>
+        <div id="legend" class="legend"></div>
+        <p class="hint">Click a neighborhood for details.</p>
+      </div>
+      <aside id="panel" class="panel" hidden aria-live="polite"></aside>
+    </main>
+    <script type="module" src="/src/map.ts"></script>
+  </body>
+</html>

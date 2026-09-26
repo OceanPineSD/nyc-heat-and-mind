@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>NYC Heat &amp; Mind — Overlap</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <span class="brand">NYC Heat &amp; Mind</span>
+      <nav>
+        <a href="/">Map</a>
+        <a href="/overlap/" aria-current="page">Overlap</a>
+        <a href="/methods/">Methods</a>
+      </nav>
+    </header>
+    <main class="page">
+      <h1>Heat risk and mental distress overlap across NYC neighborhoods. The overlap largely tracks income and racial composition. Street trees show no measurable link.</h1>
+      <section class="exhibit" aria-labelledby="exhibit-title">
+        <h2 id="exhibit-title">Spearman correlations across residential neighborhoods</h2>
+        <ol id="exhibit"></ol>
+        <p id="exhibit-note" class="hint"></p>
+      </section>
+      <div class="overlap-grid">
+        <section class="card">
+          <h2>Heat group × distress group</h2>
+          <div id="bimap" class="bimap" role="region" aria-label="Bivariate map of heat group and distress group"></div>
+          <div id="bilegend" class="bilegend"></div>
+          <p class="hint">This map shows where high heat and high distress overlap, not a relationship between them.</p>
+        </section>
+        <section class="card scatter">
+          <h2>Street trees per km² (2015) vs frequent mental distress</h2>
+          <div id="scatter-keys" class="keys"></div>
+          <div id="scatter"></div>
+          <p id="scatter-stats" class="hint"></p>
+        </section>
+      </div>
+    </main>
+    <div id="tooltip" class="tooltip" hidden></div>
+    <script type="module" src="/src/overlap.ts"></script>
+  </body>
+</html>

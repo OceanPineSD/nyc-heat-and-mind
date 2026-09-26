@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>NYC Heat &amp; Mind — Methods</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <span class="brand">NYC Heat &amp; Mind</span>
+      <nav>
+        <a href="/">Map</a>
+        <a href="/overlap/">Overlap</a>
+        <a href="/methods/" aria-current="page">Methods</a>
+      </nav>
+    </header>
+    <main class="page">
+      <h1>Methods and sources</h1>
+      <p class="lede">
+        The unit of analysis is the 2020 Neighborhood Tabulation Area (NTA). Only residential NTAs
+        (<code>ntatype = '0'</code>, 197 areas) are shown; parks, cemeteries, airports and other
+        non-residential areas are left out. All data was downloaded directly from the public sources below
+        on 2026-09-26.
+      </p>
+
+      <h2>Sources</h2>
+      <div class="table-wrap">
+        <table class="sources">
+          <thead>
+            <tr><th>Source</th><th>Dataset id</th><th>Release or data date</th><th>License or terms</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="https://github.com/nychealth/EHDP-data/blob/production/key-topics/heat-vulnerability-index/hvi-nta-2020.csv">NYC Heat Vulnerability Index by 2020 NTA</a> (NYC Health Department, Environment &amp; Health Data Portal)</td>
+              <td><code>hvi-nta-2020.csv</code> in nychealth/EHDP-data (production branch)</td>
+              <td>File last changed 2023-10-21</td>
+              <td>Apache-2.0 (repository license)</td>
+            </tr>
+            <tr>
+              <td><a href="https://data.cdc.gov/d/yjkw-uj5s">PLACES: Census Tract Data (GIS Friendly Format), 2025 release</a> (CDC)</td>
+              <td><code>yjkw-uj5s</code></td>
+              <td>2025 release; rows updated 2025-12-04</td>
+              <td>Public domain (dataset metadata)</td>
+            </tr>
+            <tr>
+              <td><a href="https://data.cityofnewyork.us/d/hm78-6dwm">2020 Census Tracts to 2020 NTAs and CDTAs Equivalency</a> (NYC Planning)</td>
+              <td><code>hm78-6dwm</code></td>
+              <td>Rows updated 2021-09-20</td>
+              <td><a href="https://opendata.cityofnewyork.us/overview/#termsofuse">NYC Open Data terms of use</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://data.cityofnewyork.us/d/9nt8-h7nd">2020 Neighborhood Tabulation Areas (NTAs)</a> (NYC Planning)</td>
+              <td><code>9nt8-h7nd</code></td>
+              <td>Rows updated 2026-05-28</td>
+              <td><a href="https://opendata.cityofnewyork.us/overview/#termsofuse">NYC Open Data terms of use</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://data.cityofnewyork.us/d/uvpi-gqnh">2015 Street Tree Census – Tree Data</a> (NYC Parks)</td>
+              <td><code>uvpi-gqnh</code></td>
+              <td>Census conducted 2015; rows updated 2017-10-04</td>
+              <td><a href="https://opendata.cityofnewyork.us/overview/#termsofuse">NYC Open Data terms of use</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://openfreemap.org/">OpenFreeMap Positron basemap</a></td>
+              <td><code>tiles.openfreemap.org/styles/positron</code></td>
+              <td>Tiles as served at viewing time</td>
+              <td>OpenFreeMap © OpenMapTiles Data from OpenStreetMap (<a href="https://www.openstreetmap.org/copyright">ODbL</a>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Heat Vulnerability Index</h2>
+      <p>
+        The HVI rank (1 = least vulnerable, 5 = most) is used as published by the city. The city builds it from these
+        neighborhood inputs: surface temperature, green space, percent of households with air conditioning, median
+        household income, and percent Black population. The file lists one NTA, BX0802 (Kingsbridge-Marble Hill), twice
+        with identical values and different GEOCODEs; one copy is dropped. Percent Black population is used
+        only for one adjustment in the statistics below (HVI rank vs frequent mental distress, controlling for median
+        income and percent Black population). It is not mapped, and it is not included in the neighborhood data file.
+      </p>
+      <p>Heat groups: HVI rank 1–2 = low, 3 = mid, 4–5 = high.</p>
+
+      <h2>Mental health</h2>
+      <p>
+        PLACES 2025 release; all 2,231 NYC tracts matched to NYC's 2020 tract-to-NTA table, measured 2026-09-26.
+        For each NTA, frequent mental distress (<code>mhlth_crudeprev</code>) and depression
+        (<code>depression_crudeprev</code>) are population-weighted means of the tract values, weighted by PLACES
+        <code>totalpopulation</code>. Every residential NTA has at least two matched tracts; 34 residential tracts in the
+        city's table have no PLACES estimate and are simply absent from the average. Distress groups are tertiles of
+        frequent mental distress across the 197 residential NTAs.
+      </p>
+
+      <h2>Street trees</h2>
+      <p>
+        Each alive tree in the 2015 census (652,173 trees) is placed in the 2020 NTA polygon that contains it; 85 trees
+        fall outside every NTA polygon. Density is trees divided by NTA land area, computed in the New York State Plane
+        Long Island projection (EPSG:2263) and converted to km².
+      </p>
+
+      <h2>Statistics</h2>
+      <p>
+        Spearman rank correlations across residential NTAs. The income-adjusted values are partial Spearman
+        correlations: all three variables are rank-transformed, the ranks of each variable in the pair are regressed on
+        the ranks of median household income, and the Pearson correlation of the residuals is reported (p-value from a
+        t-test with n − 2 − k degrees of freedom, where k is the number of control variables). One adjustment also controls for percent Black population, which the HVI uses as an input and which the <a href="https://www.cdc.gov/places/methodology/index.html">PLACES models</a> can draw on through individual race/ethnicity.
+      </p>
+      <ul id="stats-list"></ul>
+
+      <h2>Caveats</h2>
+      <ul>
+        <li>PLACES figures are model-based estimates, not direct survey counts for each neighborhood.</li>
+        <li>PLACES estimates are modeled partly from demographic data, so they share inputs with income-based measures.</li>
+        <li>The tree data is from 2015. Street trees planted or removed since then are not reflected.</li>
+        <li>Street trees are only one kind of greenery; park and private-yard trees are not counted.</li>
+        <li>All figures are correlations across neighborhoods only.</li>
+      </ul>
+    </main>
+    <script type="module" src="/src/methods.ts"></script>
+  </body>
+</html>

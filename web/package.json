@@ -1,0 +1,20 @@
+{
+  "name": "nyc-heat-and-mind-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "check:private": "../.venv/bin/python ../scripts/check_no_private_data.py"
+  },
+  "dependencies": {
+    "maplibre-gl": "^6.11.2"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1"
+  }
+}
